@@ -1,5 +1,7 @@
+from datetime import datetime
+
+
 class Utils:
     @staticmethod
     def convert_time(date: str):
-        pass
-
+        return datetime.strptime(date, "%d.%m.%Y")

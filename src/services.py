@@ -4,6 +4,7 @@ from dataclasses import asdict
 
 from .inc import google_worker
 from .schemas import DataOrder
+from .utils import Utils
 
 
 class Worker:
@@ -17,13 +18,14 @@ class Worker:
 
     @staticmethod
     def data_packaging(data: List[List]) -> List[DataOrder]:
+        usd_to_rub_price = ""
         return [
             DataOrder(
                 _id=user[0],
                 orderId=user[1],
                 priceUSD=float(user[2]),
                 priceRUB="",
-                deliveryTime=""
+                deliveryTime=Utils.convert_time(user[3])
             )
             for user in data
         ]
