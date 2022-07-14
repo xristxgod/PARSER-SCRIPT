@@ -1,5 +1,5 @@
 from typing import List, Set, Dict
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class Utils:
@@ -14,6 +14,12 @@ class Utils:
     @staticmethod
     def is_time(date: datetime) -> bool:
         if datetime.now() > date:
+            return True
+        return False
+
+    @staticmethod
+    def is_yesterday(date: datetime) -> bool:
+        if (date + timedelta(days=1)).strftime("%d.%m.%Y") == datetime.now().strftime("%d.%m.%Y"):
             return True
         return False
 

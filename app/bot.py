@@ -64,7 +64,6 @@ def is_delivery_time() -> Optional:
                 priceUSD=data.priceUSD,
                 priceRUB=data.priceRUB
             ))
-    return
 
 
 if __name__ == '__main__':

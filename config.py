@@ -17,6 +17,8 @@ logging.basicConfig(
 
 
 class Config:
+    TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "")
+    TELEGRAM_ADMIN_IDS = os.getenv("TELEGRAM_ADMIN_IDS", "").split(",")
     DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{os.path.join(CONFIG_DIR, 'db.db')}")
     SPREADSHEET_ID = os.getenv("SPREADSHEET_ID", "13k0ORwAXAQ4LwaUGfReXmJ7x0SsXpHussJQZ-abm6lI")
     PAGE_NAME = os.getenv("PAGE_NAME", "test_page")

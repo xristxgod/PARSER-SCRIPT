@@ -3,6 +3,7 @@ import xmltodict
 
 from .schemas import SendToTelegramData
 from ..utils import Utils
+from config import Config
 
 
 class Client:
@@ -16,4 +17,17 @@ class Client:
 
     @staticmethod
     def send_to_telegram(data: SendToTelegramData) -> bool:
-        pass
+        for chat_id in Config.TELEGRAM_ADMIN_IDS:
+            requests.get(
+                f"https://api.telegram.org/bot{Config.TELEGRAM_TOKEN}/sendMessage",
+                json={
+                    "chat_id": chat_id,
+                    "text": (
+                        "🔴 Delivery date passed!\n"
+                        f"Planned delivery date: {data.deliveryTime}\n"
+                        f"Price: {data.priceUSD} USD | {data.priceRUB} RUB"
+                    ),
+                    "parse_mode": "html"
+                }
+            )
+        return True
