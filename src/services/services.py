@@ -50,7 +50,6 @@ class OrderController:
 
     @staticmethod
     def read(_id: int = None) -> Union[List[OrderData], OrderData]:
-        print(Worker.data_packaging([data.to_list for data in session.query(OrderModel).all()]))
         try:
             if _id is None:
                 return Worker.data_packaging([data.to_list for data in session.query(OrderModel).all()])
