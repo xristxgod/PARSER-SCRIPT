@@ -12,6 +12,12 @@ class Utils:
         return datetime.now().strftime("%d/%m/%Y")
 
     @staticmethod
+    def is_time(date: datetime) -> bool:
+        if datetime.now() > date:
+            return True
+        return False
+
+    @staticmethod
     def get_ids(data: List[Dict]) -> Set[int]:
         return {_id.get("id") for _id in data}
 

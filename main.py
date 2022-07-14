@@ -1,8 +1,16 @@
+import time
+
 from art import tprint
 
-from src.services.services import OrderController
+from app import run
 
 
 def main():
     tprint("PARSER SCRIPT", font="bulbhead")
-    pass
+    while True:
+        run()
+        time.sleep(150)
+
+
+if __name__ == '__main__':
+    main()

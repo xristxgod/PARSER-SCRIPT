@@ -1,7 +1,8 @@
 import requests
 import xmltodict
 
-from src.utils import Utils
+from .schemas import SendToTelegramData
+from ..utils import Utils
 
 
 class Client:
@@ -12,3 +13,7 @@ class Client:
         )
         price = list(filter(lambda x: x.get("CharCode") == currency.upper(), data['ValCurs']["Valute"]))[0]["Value"]
         return float(price.replace(',', "."))
+
+    @staticmethod
+    def send_to_telegram(data: SendToTelegramData) -> bool:
+        pass

@@ -1,13 +1,15 @@
-import json
 from typing import Optional, List, Dict
 
 from src.services import Worker, OrderController
+from src.external import Client
+from src.external.schemas import SendToTelegramData
 from src.utils import Utils
 from src.services.schemas import OrderData
 from config import logger
 
 
 def run() -> Optional:
+    """Parser | Google sheets => SQL DB"""
     logger.info("START NEW ITERATION")
     new_data: List[OrderData] = Worker.data_packaging(Worker.get_data())
     old_data: List[OrderData] = OrderController.read()
@@ -52,6 +54,20 @@ def run() -> Optional:
             logger.error(f"{error} | UPDATE DATA: BAD! IDS: {Utils.get_ids(update_data)}")
 
 
+def is_delivery_time() -> Optional:
+    all_data = OrderController.read()
+    for data in all_data:
+        if Utils.is_time(data.deliveryTime):
+            Client.send_to_telegram(data=SendToTelegramData(
+                orderId=data.orderId,
+                deliveryTime=data.deliveryTime,
+                priceUSD=data.priceUSD,
+                priceRUB=data.priceRUB
+            ))
+    return
+
+
 if __name__ == '__main__':
     """Run one iteration"""
-    run()
+    # run()
+    is_delivery_time()
