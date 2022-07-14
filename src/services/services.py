@@ -1,5 +1,5 @@
 import datetime
-from typing import Union, List
+from typing import Union, List, Set
 
 from .schemas import OrderData
 from ..models import OrderModel, session
@@ -35,16 +35,15 @@ class Worker:
 
 class OrderController:
     @staticmethod
-    def create(data: Union[List[OrderData], OrderData]) -> bool:
+    def create(data: List[OrderData]) -> bool:
         try:
-            if isinstance(data, list):
-                [session.add(OrderModel(**d.to_dict)) for d in data]
-            else:
-                session.add(OrderModel(**data.to_dict))
+            _ = [session.add(OrderModel(**d.to_dict)) for d in data]
             session.commit()
+            return True
         except Exception as error:
             logger.error(f"{error}")
             session.rollback()
+            return False
         finally:
             session.close()
 
@@ -56,5 +55,35 @@ class OrderController:
             return Worker.data_packaging(session.query(OrderModel).get(12).to_list)
         except Exception as error:
             logger.error(f"{error}")
+        finally:
+            session.close()
+
+    @staticmethod
+    def update(data: List[OrderData]) -> bool:
+        try:
+            for d in data:
+                order: OrderModel = session.query(OrderModel).get(d._id)
+                order.order_id = d.orderId
+                order.price_usd = d.priceUSD
+                order.delivery_time = d.deliveryTime
+            session.commit()
+            return True
+        except Exception as error:
+            logger.error(f"{error}")
+            session.rollback()
+            return False
+        finally:
+            session.close()
+
+    @staticmethod
+    def delete(ids: Set[int]) -> bool:
+        try:
+            [session.delete(session.query(OrderModel).get(_id)) for _id in ids]
+            session.commit()
+            return True
+        except Exception as error:
+            logger.error(f"{error}")
+            session.rollback()
+            return False
         finally:
             session.close()

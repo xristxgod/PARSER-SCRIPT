@@ -29,6 +29,29 @@ def run() -> Optional:
             update_data.append(new)
             break
     logger.info(f"UPDATE DATA. IDS: {Utils.get_ids(update_data)}" if len(update_data) > 0 else "NOT UPDATE")
+    if len(create_data) > 0:
+        try:
+            if not OrderController.create(Worker.data_packaging([list(data.values()) for data in create_data])):
+                raise Exception
+            logger.info(f"CREATE DATA: SUCCESSFULLY! IDS: {Utils.get_ids(create_data)}")
+        except Exception as error:
+            logger.error(f"{error} | CREATE DATA: BAD! IDS: {Utils.get_ids(create_data)}")
+    if len(delete_data) > 0:
+        try:
+            if not OrderController.delete(Utils.get_ids(delete_data)):
+                raise Exception
+            logger.info(f"DELETE DATA: SUCCESSFULLY! IDS: {Utils.get_ids(delete_data)}")
+        except Exception as error:
+            logger.error(f"{error} | DELETE DATA: BAD! IDS: {Utils.get_ids(delete_data)}")
+    if len(update_data) > 0:
+        try:
+            if not OrderController.update(Worker.data_packaging([list(data.values()) for data in update_data])):
+                raise Exception
+            logger.info(f"UPDATE DATA: SUCCESSFULLY! IDS: {Utils.get_ids(update_data)}")
+        except Exception as error:
+            logger.error(f"{error} | UPDATE DATA: BAD! IDS: {Utils.get_ids(update_data)}")
 
 
-print(run())
+if __name__ == '__main__':
+    """Run one iteration"""
+    run()
