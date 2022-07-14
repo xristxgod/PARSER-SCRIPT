@@ -4,3 +4,4 @@ google-auth-oauthlib
 xmltodict
 SQLAlchemy
 sqlalchemy-utils
+art
