@@ -1,6 +1,9 @@
+from datetime import datetime
 from typing import Optional, List
+from dataclasses import asdict
 
-from src.inc import google_worker
+from .inc import google_worker
+from .schemas import DataOrder
 
 
 class Worker:
@@ -13,5 +16,14 @@ class Worker:
         return all_data
 
     @staticmethod
-    def data_packaging(data: List[List]):
-        pass
+    def data_packaging(data: List[List]) -> List[DataOrder]:
+        return [
+            DataOrder(
+                _id=user[0],
+                orderId=user[1],
+                priceUSD=float(user[2]),
+                priceRUB="",
+                deliveryTime=""
+            )
+            for user in data
+        ]
