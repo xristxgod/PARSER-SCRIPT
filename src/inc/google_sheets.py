@@ -24,11 +24,11 @@ class GoogleSheetsAPIWorker:
         self.__credentials: Credentials = Credentials.from_service_account_file(CREDENTIALS_CONFIG_FILE, scopes=self.SCOPES)
         self.__service = build('sheets', 'v4', credentials=self.__credentials).spreadsheets()
 
-    def get_data(self, start: int = 2, end: int = 100) -> List[List]:
+    def get_data(self, start: int = 1, end: int = 50) -> List[List]:
         return self.__service.values().get(
             spreadsheetId=self.SPREADSHEET_ID,
-            range=f"{self.PAGE_NAME}!A{start}:D100{end}"
-        ).execute().get("values")
+            range=f"{self.PAGE_NAME}!A{start+1}:D{end+1}"
+        ).execute().get("values", [])
 
 
 google_worker = GoogleSheetsAPIWorker()
