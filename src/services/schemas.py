@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 @dataclass()
-class DataOrder:
+class OrderData:
     _id: int
     orderId: int
     priceUSD: float

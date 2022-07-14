@@ -2,7 +2,7 @@ from typing import List
 
 from src.external import Client
 from src.inc import google_worker
-from src.services.schemas import DataOrder
+from src.services.schemas import OrderData
 from src.utils import Utils
 
 
@@ -16,7 +16,7 @@ class Worker:
         return all_data
 
     @staticmethod
-    def data_packaging(data: List[List]) -> List[DataOrder]:
+    def data_packaging(data: List[List]) -> List[OrderData]:
         usd_to_rub_price = Client.get_price("USD")
         return [
             DataOrder(
@@ -28,7 +28,3 @@ class Worker:
             )
             for user in data
         ]
-
-
-def run():
-    pass
