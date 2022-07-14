@@ -11,7 +11,7 @@ from config import logger
 def run() -> Optional:
     """Parser | Google sheets => SQL DB"""
     logger.info("START NEW ITERATION")
-    new_data: List[OrderData] = Worker.data_packaging(Worker.get_data())
+    new_data: List[OrderData] = Worker.data_packaging(Worker.get_data(all_data=[]))
     old_data: List[OrderData] = OrderController.read()
     if len(old_data) == 0:
         logger.info("INIT ORDERS")

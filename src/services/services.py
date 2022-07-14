@@ -15,7 +15,7 @@ class Worker:
         data = google_worker.get_data(start, end=end)
         if len(data) > 0:
             all_data.extend(data)
-            return Worker.get_data(start=end+1, end=end+51)
+            return Worker.get_data(start=end+1, end=end+51, all_data=all_data)
         return all_data
 
     @staticmethod
