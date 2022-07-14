@@ -1,11 +1,9 @@
-from datetime import datetime
-from typing import Optional, List
-from dataclasses import asdict
+from typing import List
 
-from .external import Client
-from .inc import google_worker
-from .schemas import DataOrder
-from .utils import Utils
+from src.external import Client
+from src.inc import google_worker
+from src.services.schemas import DataOrder
+from src.utils import Utils
 
 
 class Worker:
