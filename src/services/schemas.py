@@ -14,5 +14,5 @@ class OrderData:
     @property
     def to_dict(self) -> Dict:
         return {
-            "id": self._id, "orderId": self.orderId, "priceUSD": self.priceUSD, "deliveryTime": self.deliveryTime
+            "id": self._id, "order_id": self.orderId, "price_usd": self.priceUSD, "delivery_time": self.deliveryTime
         }

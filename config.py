@@ -10,6 +10,10 @@ CREDENTIALS_CONFIG_FILE = os.path.join(CONFIG_DIR, "credentials.json")
 
 
 logger = logging.getLogger(__name__)
+logging.basicConfig(
+    format=u"[%(asctime)s][%(filename)s][LINE:%(lineno)d][%(levelname)s] | %(message)s",
+    level=logging.INFO
+)
 
 
 class Config:

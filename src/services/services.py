@@ -34,8 +34,20 @@ class Worker:
 
 class OrderController:
     @staticmethod
+    def create(data: Union[List[OrderData], OrderData]) -> bool:
+        try:
+            if isinstance(data, list):
+                [session.add(OrderModel(**d.to_dict)) for d in data]
+            else:
+                session.add(OrderModel(**data.to_dict))
+        except Exception as error:
+            logger.error(f"{error}")
+            session.rollback()
+        finally:
+            session.close()
+
+    @staticmethod
     def read(_id: int = None) -> Union[List[OrderData], OrderData]:
-        print(session.query(OrderModel).all())
         try:
             if _id is None:
                 return Worker.data_packaging(session.query(OrderModel).all())
