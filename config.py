@@ -10,6 +10,6 @@ CREDENTIALS_CONFIG_FILE = os.path.join(CONFIG_DIR, "credentials.json")
 
 
 class Config:
-    SAMPLE_SPREADSHEET_ID = os.getenv("SAMPLE_SPREADSHEET_ID")
-    SAMPLE_RANGE_NAME = os.getenv("SAMPLE_RANGE_NAME")
-    SHEET_ID = os.getenv("SHEET_ID")
+    SPREADSHEET_ID = os.getenv("SPREADSHEET_ID", "13k0ORwAXAQ4LwaUGfReXmJ7x0SsXpHussJQZ-abm6lI")
+    PAGE_NAME = os.getenv("PAGE_NAME", "test_page")
+    SHEET_ID = os.getenv("SHEET_ID", "0")
