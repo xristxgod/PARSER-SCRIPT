@@ -6,6 +6,7 @@ from art import tprint
 
 from app import run, is_delivery_time
 from src.utils import Utils
+from config import logger
 
 
 class Run:
@@ -18,6 +19,8 @@ class Run:
             run()
             if self.last_check is None or Utils.is_yesterday(date=self.last_check):
                 is_delivery_time()
+                self.last_check = datetime.datetime.now()
+            logger.error("BOT SLEEP!")
             time.sleep(150)
 
 

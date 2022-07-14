@@ -68,5 +68,5 @@ def is_delivery_time() -> Optional:
 
 if __name__ == '__main__':
     """Run one iteration"""
-    # run()
+    run()
     is_delivery_time()

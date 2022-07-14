@@ -13,13 +13,14 @@ class Utils:
 
     @staticmethod
     def is_time(date: datetime) -> bool:
-        if datetime.now() > date:
+        if datetime.now().date() > date.date():
             return True
         return False
 
     @staticmethod
     def is_yesterday(date: datetime) -> bool:
-        if (date + timedelta(days=1)).strftime("%d.%m.%Y") == datetime.now().strftime("%d.%m.%Y"):
+        # if (date + timedelta(days=1)).strftime("%d.%m.%Y") == datetime.now().strftime("%d.%m.%Y"):
+        if date.date() + timedelta(days=1) == datetime.now().date():
             return True
         return False
 

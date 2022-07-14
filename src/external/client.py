@@ -24,7 +24,7 @@ class Client:
                     "chat_id": chat_id,
                     "text": (
                         "🔴 Delivery date passed!\n"
-                        f"Planned delivery date: {data.deliveryTime}\n"
+                        f"Planned delivery date: {data.deliveryTime.date()}\n"
                         f"Price: {data.priceUSD} USD | {data.priceRUB} RUB"
                     ),
                     "parse_mode": "html"
