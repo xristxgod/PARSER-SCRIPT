@@ -11,11 +11,12 @@ services:
     env_file:
       - .env.dev
     restart: always
+    volumes:
+      - ./config/logs/:/home/app/files
     logging:
       options:
         max-size: 10m
         max-file: "3"
-
 
   database:
     container_name: database
