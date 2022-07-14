@@ -35,6 +35,7 @@ class Worker:
 class OrderController:
     @staticmethod
     def read(_id: int = None) -> Union[List[OrderData], OrderData]:
+        print(session.query(OrderModel).all())
         try:
             if _id is None:
                 return Worker.data_packaging(session.query(OrderModel).all())

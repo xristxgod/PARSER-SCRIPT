@@ -1,15 +1,16 @@
-import datetime
-
 import sqlalchemy
 from sqlalchemy import Column, orm
 from sqlalchemy.types import BigInteger, DateTime, Float
+from sqlalchemy_utils import database_exists, create_database
 
-from .utils import Utils
+from src.utils import Utils
 from config import Config
 
 
 BaseModel = orm.declarative_base()
 engine = sqlalchemy.create_engine(Config.DATABASE_URL, connect_args={"check_same_thread": False})
+if not database_exists(engine.url):
+    create_database(engine.url)
 session = orm.Session(engine)
 
 
@@ -23,3 +24,7 @@ class OrderModel(BaseModel):
 
     def __repr__(self):
         return f"{self.order_id}"
+
+
+def create_db():
+    BaseModel.metadata.create_all(engine)

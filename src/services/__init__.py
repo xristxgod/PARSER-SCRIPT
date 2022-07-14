@@ -1,4 +1,4 @@
-from .services import Worker
+from .services import Worker, OrderController
 
 
-__all__ = ["Worker"]
+__all__ = ["Worker", "OrderController"]

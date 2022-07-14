@@ -3,3 +3,4 @@ oauth2client
 google-auth-oauthlib
 xmltodict
 SQLAlchemy
+sqlalchemy-utils

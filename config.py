@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 class Config:
-    DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///climb.db")
+    DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{os.path.join(CONFIG_DIR, 'db.db')}")
     SPREADSHEET_ID = os.getenv("SPREADSHEET_ID", "13k0ORwAXAQ4LwaUGfReXmJ7x0SsXpHussJQZ-abm6lI")
     PAGE_NAME = os.getenv("PAGE_NAME", "test_page")
     SHEET_ID = os.getenv("SHEET_ID", "0")
