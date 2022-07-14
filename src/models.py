@@ -1,3 +1,5 @@
+from typing import List
+
 import sqlalchemy
 from sqlalchemy import Column, orm
 from sqlalchemy.types import BigInteger, DateTime, Float
@@ -24,6 +26,10 @@ class OrderModel(BaseModel):
 
     def __repr__(self):
         return f"{self.order_id}"
+
+    @property
+    def to_list(self) -> List:
+        return [self.id, self.order_id, self.price_usd, self.delivery_time]
 
 
 def create_db():

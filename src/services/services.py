@@ -1,3 +1,4 @@
+import datetime
 from typing import Union, List
 
 from .schemas import OrderData
@@ -26,7 +27,7 @@ class Worker:
                 orderId=user[1],
                 priceUSD=float(user[2]),
                 priceRUB=float(user[2]) * usd_to_rub_price,
-                deliveryTime=Utils.convert_time(user[3])
+                deliveryTime=Utils.convert_time(user[3]) if not isinstance(user[3], datetime.datetime) else user[3]
             )
             for user in data
         ]
@@ -40,6 +41,7 @@ class OrderController:
                 [session.add(OrderModel(**d.to_dict)) for d in data]
             else:
                 session.add(OrderModel(**data.to_dict))
+            session.commit()
         except Exception as error:
             logger.error(f"{error}")
             session.rollback()
@@ -48,10 +50,11 @@ class OrderController:
 
     @staticmethod
     def read(_id: int = None) -> Union[List[OrderData], OrderData]:
+        print(Worker.data_packaging([data.to_list for data in session.query(OrderModel).all()]))
         try:
             if _id is None:
-                return Worker.data_packaging(session.query(OrderModel).all())
-            return Worker.data_packaging([session.query(OrderModel).get(_id).first()])
+                return Worker.data_packaging([data.to_list for data in session.query(OrderModel).all()])
+            return Worker.data_packaging(session.query(OrderModel).get(12).to_list)
         except Exception as error:
             logger.error(f"{error}")
         finally:
