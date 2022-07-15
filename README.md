@@ -1,6 +1,9 @@
 # PARSER BOT + WEB INTERFACE
 VERSION 1.0.0
 
+ * [`Demon`](./demon/README.md) - **Working with data**
+ * [`Interface`](./interface/README.md) - **Single-page interface**
+
 
 > `Task`: https://kanalservis.notion.site/kanalservis/Python-82f517c516d041b8aca227f0a44ed1f1
 > 
@@ -19,7 +22,7 @@ VERSION 1.0.0
 >
 > `TELEGRAM_ADMIN_IDS` - Telegram admin chat ids. Example: 1415125,41241551 . Can be obtained here: [`@BotFather`](https://t.me/username_to_id_bot)
 > 
-> `DATABASE_URL` - Database url. From the database inside the container. Example: postgresql://root:root@sql_database:5432/bot_parser_database
+> `DATABASE_URL` - Database url. From the database inside the container. Example: postgresql://root:root@sql_database:5432/orders_parser
 > 
 > `MONGODB_URL` - NoSQL Database url. From the database inside the container. Example: mongodb://root:root@nosql_database:27017
 > 
@@ -36,14 +39,4 @@ VERSION 1.0.0
 > docker-compose -f bot-docker-compose.yml up --build
 > # Stop
 > docker-compose -f bot-docker-compose.yml stop
-> # In container
-> docker exec -it bot /bin/bash
-> # Run always
-> python3 ./main.py
-> # Run one
-> python3 ./app/bot.py
 > ```
-
-### Screenshot of the work:
-![image](https://user-images.githubusercontent.com/84931791/179046372-d928b47c-e042-46c1-809b-6c15e1081911.png)
-
