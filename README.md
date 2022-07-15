@@ -32,7 +32,6 @@ VERSION 1.0.0
 
 ## How to run:
 > ```shell
-> # Docker
 > # Run
 > docker-compose -f bot-docker-compose.yml up --build
 > # Stop
