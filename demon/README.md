@@ -2,7 +2,7 @@
 
 > Working with Data from Google Sheet
 
-### How to run:
+## How to run:
 > ```shell
 > # Connect to container
 > docker exec -it bot /bin/bash

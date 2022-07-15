@@ -4,10 +4,8 @@ VERSION 1.0.0
  * [`Demon`](./demon/README.md) - **Working with data**
  * [`Interface`](./interface/README.md) - **Single-page interface**
 
-
-> `Task`: https://kanalservis.notion.site/kanalservis/Python-82f517c516d041b8aca227f0a44ed1f1
-> 
-> `Sheet`: https://docs.google.com/spreadsheets/d/13k0ORwAXAQ4LwaUGfReXmJ7x0SsXpHussJQZ-abm6lI/edit#gid=0
+> [`Task`](https://kanalservis.notion.site/kanalservis/Python-82f517c516d041b8aca227f0a44ed1f1) 
+> [`Sheet`](https://docs.google.com/spreadsheets/d/13k0ORwAXAQ4LwaUGfReXmJ7x0SsXpHussJQZ-abm6lI/edit#gid=0)
 
 ## Setup:
 > ```shell
@@ -32,7 +30,7 @@ VERSION 1.0.0
 > 
 > `SHEET_ID` - ID of the sheet. The data is located inside the URL of the page with the sheet. `https://docs.google.com/.../edit#gid={SHEET_ID}`
 
-### How to run:
+## How to run:
 > ```shell
 > # Docker
 > # Run
