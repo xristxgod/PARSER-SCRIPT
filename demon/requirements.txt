@@ -6,3 +6,4 @@ SQLAlchemy
 sqlalchemy-utils
 art
 pymongo
+psycopg2
