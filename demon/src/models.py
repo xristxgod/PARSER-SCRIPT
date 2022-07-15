@@ -18,7 +18,7 @@ from config import Config, logger
 
 
 BaseModel = orm.declarative_base()
-engine = sqlalchemy.create_engine(Config.DATABASE_URL, connect_args={"check_same_thread": False})
+engine = sqlalchemy.create_engine(Config.DATABASE_URL)
 if not database_exists(engine.url):
     create_database(engine.url)
 session = orm.Session(engine)

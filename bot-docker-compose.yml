@@ -58,7 +58,7 @@ services:
       - .env.dev
     restart: always
     volumes:
-      - ./config/:/home/app/config
+      - ./config/:/home/app/files
     depends_on:
       - sql_database
       - nosql_database
