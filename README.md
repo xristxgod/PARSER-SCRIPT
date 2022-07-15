@@ -1,4 +1,4 @@
-# PARSER BOT + WEB INTERFACE
+# PARSER DEMON + WEB INTERFACE
 VERSION 1.0.0
 
  * [`Demon`](./demon/README.md) - **Working with data**
