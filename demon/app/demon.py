@@ -71,16 +71,40 @@ class Demon:
         return update_data
 
     @staticmethod
-    def add_data(data: List[Dict], message: str) -> Optional:
+    def create_data(data: List[Dict]) -> Optional:
         if len(data) > 0:
             data_for_add = google_sheets_worker.data_packaging([list(d.values()) for d in data])
             status_sql = OrderModel.create(data_for_add)
-            status_no_sql = order_storage.create(data_for_add)
+            status_no_sql = order_storage.create(utils.convert_data_back(data_for_add))
             if status_sql and status_no_sql:
-                logger.info(f"{message.upper()} DATA: SUCCESSFULLY! IDS: {utils.get_ids(data)}")
+                logger.info(f"CREATE DATA: SUCCESSFULLY! IDS: {utils.get_ids(data)}")
             else:
-                logger.error(f"{message.upper()} DATA: BAD! IDS: {utils.get_ids(data)}")
-        logger.error(f"DON'T HAVE {message.upper()} DATA")
+                logger.error(f"CREATE DATA: BAD! IDS: {utils.get_ids(data)}")
+        logger.error(f"DON'T HAVE CREATE DATA")
+
+    @staticmethod
+    def delete_data(data: List[Dict]) -> Optional:
+        if len(data) > 0:
+            data_for_delete = set(i.get("id") for i in data)
+            status_sql = OrderModel.delete(data_for_delete)
+            status_no_sql = order_storage.delete(data_for_delete)
+            if status_sql and status_no_sql:
+                logger.info(f"DELETE DATA: SUCCESSFULLY! IDS: {utils.get_ids(data)}")
+            else:
+                logger.error(f"DELETE DATA: BAD! IDS: {utils.get_ids(data)}")
+        logger.error(f"DON'T HAVE DELETE DATA")
+
+    @staticmethod
+    def update_date(data: List[Dict]) -> Optional:
+        if len(data) > 0:
+            data_for_update = google_sheets_worker.data_packaging([list(d.values()) for d in data])
+            status_sql = OrderModel.update(data_for_update)
+            status_no_sql = order_storage.update(utils.convert_data_to_update(utils.convert_data_back(data_for_update)))
+            if status_sql and status_no_sql:
+                logger.info(f"UPDATE DATA: SUCCESSFULLY! IDS: {utils.get_ids(data)}")
+            else:
+                logger.error(f"UPDATE DATA: BAD! IDS: {utils.get_ids(data)}")
+        logger.error(f"DON'T HAVE UPDATE DATA")
 
     @staticmethod
     def parser_script() -> Optional:
@@ -94,9 +118,9 @@ class Demon:
             return None
         new_data: List[Dict] = [i.to_dict for i in new_data]
         old_data: List[Dict] = [i.to_dict for i in old_data]
-        Demon.add_data(data=Demon.cd_data(new_data, old_data, new_data), message="CREATE")
-        Demon.add_data(data=Demon.cd_data(old_data, new_data, old_data), message="DELETE")
-        Demon.add_data(data=Demon.update_data(new_data, old_data=old_data), message="UPDATE")
+        Demon.create_data(data=Demon.cd_data(new_data, old_data, new_data))
+        Demon.delete_data(data=Demon.cd_data(old_data, new_data, old_data))
+        Demon.update_date(data=Demon.update_data(new_data, old_data=old_data))
 
 
 if __name__ == '__main__':

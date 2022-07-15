@@ -29,12 +29,12 @@ class SendToTelegramData:
 
 @dataclass()
 class OrderStorageData:
-    _id: int                            # ID in DB
-    orderId: int                        # Order id
-    priceUSD: float                     # Price in USD
-    priceRUB: float                     # Price in RUB
-    deliveryTime: datetime              # Delivery time
-    sentTelegram: bool                  # Sent to telegram if delivery time passed
+    _id: int                                               # ID in DB
+    orderId: int                                           # Order id
+    priceUSD: float                                        # Price in USD
+    priceRUB: float                                        # Price in RUB
+    deliveryTime: datetime                                 # Delivery time
+    sentTelegram: Optional[bool] = field(default=False)    # Sent to telegram if delivery time passed
 
     @staticmethod
     def keys() -> List:
@@ -50,11 +50,6 @@ class OrderStorageUpdateData:
 
     @property
     def to_dict(self) -> Dict:
-        del self._id
-        if self.priceUSD is None:
-            del self.priceUSD
-        if self.deliveryTime is None:
-            del self.deliveryTime
-        if self.sentTelegram is None:
-            del self.sentTelegram
-        return self.__dict__
+        return {
+            "priceUSD": self.priceUSD, "deliveryTime": self.deliveryTime, "sentTelegram": self.sentTelegram
+        }

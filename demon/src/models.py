@@ -203,7 +203,7 @@ class OrderStorage(BaseStorage, CRUD):
             logger.error(f"{error}")
             return False
 
-    def delete(self, ids: List[int]) -> bool:
+    def delete(self, ids: Set[int]) -> bool:
         """Delete order bu id"""
         try:
             for _id in ids:

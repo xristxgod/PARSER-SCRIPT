@@ -1,7 +1,7 @@
 from typing import List, Set, Dict
 from datetime import datetime, timedelta
 
-from ..schemas import OrderData, OrderStorageData
+from ..schemas import OrderData, OrderStorageData, OrderStorageUpdateData
 
 
 class Utils:
@@ -80,6 +80,32 @@ class Utils:
                 priceUSD=d.priceUSD,
                 priceRUB=d.priceRUB,
                 deliveryTime=d.deliveryTime
+            )
+            for d in data
+        ]
+
+    @staticmethod
+    def convert_data_back(data: List[OrderData]) -> List[OrderStorageData]:
+        return [
+            OrderStorageData(
+                _id=d._id,
+                orderId=d.orderId,
+                priceUSD=d.priceUSD,
+                priceRUB=d.priceRUB,
+                deliveryTime=d.deliveryTime,
+                sentTelegram=False
+            )
+            for d in data
+        ]
+
+    @staticmethod
+    def convert_data_to_update(data: List[OrderStorageData]) -> List[OrderStorageUpdateData]:
+        return [
+            OrderStorageUpdateData(
+                _id=d._id,
+                priceUSD=d.priceUSD,
+                deliveryTime=d.deliveryTime,
+                sentTelegram=d.sentTelegram
             )
             for d in data
         ]

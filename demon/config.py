@@ -19,7 +19,7 @@ logging.basicConfig(
 class Config:
     TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "5547645946:AAE18qQ070Nk7GhJHZ_R58N0indHhCKxreg")
     TELEGRAM_ADMIN_IDS = os.getenv("TELEGRAM_ADMIN_IDS", "688225742,").split(",")
-    MONGODB_URL = os.getenv("MONGODB_URL", "mongodb://docker:mongopw@localhost:49154")
+    MONGODB_URL = os.getenv("MONGODB_URL", "mongodb://docker:mongopw@localhost:49155")
     MONGODB_NAME = os.getenv("MONGODB_NAME", "orders_db")
     DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{os.path.join(CONFIG_DIR, 'db.db')}")
     SPREADSHEET_ID = os.getenv("SPREADSHEET_ID", "13k0ORwAXAQ4LwaUGfReXmJ7x0SsXpHussJQZ-abm6lI")
