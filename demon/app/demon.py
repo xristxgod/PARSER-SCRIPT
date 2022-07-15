@@ -4,9 +4,9 @@ from typing import Optional, Tuple, List, Dict
 
 from art import tprint
 
-from src import google_sheets_worker
+from src import google_sheets_worker, client
 from src.models import OrderModel, order_storage
-from src.schemas import OrderData, OrderStorageData
+from src.schemas import OrderData, OrderStorageData, OrderStorageUpdateData, SendToTelegramData
 from src.utils import utils
 from config import logger
 
@@ -27,7 +27,7 @@ class Demon:
         while True:
             self.parser_script()
             if self.last_check is None or utils.is_yesterday(date=self.last_check):
-                # is_delivery_time()
+                self.delivery_time_script()
                 self.last_check = datetime.datetime.now()
             logger.error("BOT SLEEP!")
             time.sleep(10)
@@ -122,7 +122,30 @@ class Demon:
         Demon.delete_data(data=Demon.cd_data(old_data, new_data, old_data))
         Demon.update_date(data=Demon.update_data(new_data, old_data=old_data))
 
+    # <<<==================================>>> Worker Parser script <<<==============================================>>>
+
+    @staticmethod
+    def delivery_time_script() -> Optional:
+        all_data: List[OrderStorageData] = order_storage.read()
+        update_data: List[OrderStorageUpdateData] = []
+        for data in all_data:
+            if not data.sentTelegram and utils.is_time(data.deliveryTime):
+                logger.info(f"DELIVERY PASSED. ORDER: {data.orderId}")
+                client.send_to_telegram(data=SendToTelegramData(
+                    orderId=data.orderId,
+                    deliveryTime=data.deliveryTime,
+                    priceUSD=data.priceUSD,
+                    priceRUB=data.priceRUB
+                ))
+                update_data.append(OrderStorageUpdateData(
+                    _id=data._id,
+                    sentTelegram=True,
+                    deliveryTime=data.deliveryTime,
+                    priceUSD=data.priceUSD
+                ))
+        order_storage.update(data=update_data)
+
 
 if __name__ == '__main__':
+    """Run script"""
     Demon().run()
-
