@@ -3,7 +3,7 @@ from typing import List
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 
-from config import Config, CREDENTIALS_CONFIG_FILE
+from config import Config, CREDENTIALS_CONFIG_FILE, logger
 
 
 class GoogleSheetsAPIWorker:
@@ -32,10 +32,13 @@ class GoogleSheetsAPIWorker:
         :param end: Where to finish the search
         :return: Data from the table
         """
-        return self.__service.values().get(
-            spreadsheetId=self.SPREADSHEET_ID,
-            range=f"{self.PAGE_NAME}!A{start+1}:D{end+1}"
-        ).execute().get("values", [])
+        try:
+            return self.__service.values().get(
+                spreadsheetId=self.SPREADSHEET_ID,
+                range=f"{self.PAGE_NAME}!A{start+1}:D{end+1}"
+            ).execute().get("values", [])
+        except Exception as error:
+            logger.error(f"{error}")
 
 
 google_worker = GoogleSheetsAPIWorker()
