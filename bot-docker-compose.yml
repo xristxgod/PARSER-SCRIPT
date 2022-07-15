@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
-      POSTGRES_DB: bot_parser_database
+      POSTGRES_DB: orders_parser
     ports:
       - "5432:5432"
     expose:
@@ -15,7 +15,7 @@ services:
     networks:
       - bot_parser
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U root -d bot_parser" ]
+      test: [ "CMD-SHELL", "pg_isready -U root -d orders_parser" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -58,7 +58,7 @@ services:
       - .env.dev
     restart: always
     volumes:
-      - ./config/:/home/app/files
+      - ./config/:/home/app/config
     depends_on:
       - sql_database
       - nosql_database
