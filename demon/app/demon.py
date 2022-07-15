@@ -30,7 +30,7 @@ class Demon:
                 self.delivery_time_script()
                 self.last_check = datetime.datetime.now()
             logger.error("BOT SLEEP!")
-            time.sleep(10)
+            time.sleep(self.TIME_RUN)
 
     # <<<==================================>>> Worker Parser script <<<==============================================>>>
 

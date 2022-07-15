@@ -19,7 +19,9 @@ VERSION 1.0.0
 >
 > `TELEGRAM_ADMIN_IDS` - Telegram admin chat ids. Example: 1415125,41241551 . Can be obtained here: [`@BotFather`](https://t.me/username_to_id_bot)
 > 
-> `DATABASE_URL` - Database url. From the database inside the container. Example: postgres://root:root@database:5432/bot_parser_database
+> `DATABASE_URL` - Database url. From the database inside the container. Example: postgres://root:root@sql_database:5432/bot_parser_database
+> 
+> `MONGODB_URL` - NoSQL Database url. From the database inside the container. Example: mongodb://root:root@nosql_database:27017
 > 
 > `SPREADSHEET_ID` - To work with google sheets api. The data is located inside the URL of the page with the sheet. Example: `https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/...`
 > 
