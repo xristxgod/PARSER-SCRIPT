@@ -1,7 +1,7 @@
 # Interface
 
 * [`Back`](../README.md)
-* [`Interface`](../interface/README.md) - **Single-page interface**
+* [`Demon`](../demon/README.md) - **Working with data**
 
 > Only demonstrates service statistics.
 

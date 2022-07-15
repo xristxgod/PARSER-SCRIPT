@@ -1,5 +1,8 @@
 # Demon
 
+* [`Back`](../README.md)
+* [`Interface`](../interface/README.md) - **Single-page interface**
+
 > Working with Data from Google Sheet
 
 ## How to run:
