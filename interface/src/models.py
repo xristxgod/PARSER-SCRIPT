@@ -1,9 +1,13 @@
 from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
 
-from .app import db
+from src import app
+
+db = SQLAlchemy(app)
 
 
-class UserModel(db.Model):
+class OrderModel(db.Model):
+    __tablename__ = "order_model"
     id = db.Column(db.BigInteger, primary_key=True)
     order_id = db.Column(db.BigInteger, unique=True)
     price_usd = db.Column(db.Float, default=0)
@@ -12,3 +16,7 @@ class UserModel(db.Model):
 
     def __repr__(self):
         return f"{self.order_id}"
+
+
+def db_setup():
+    db.create_all()
