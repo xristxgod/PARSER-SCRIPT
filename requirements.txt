@@ -1,7 +1,0 @@
-google-api-python-client
-oauth2client<4.0.0
-google-auth-oauthlib
-xmltodict
-SQLAlchemy
-sqlalchemy-utils
-art
