@@ -1,4 +1,4 @@
-from .app import app
+from .app import init_app
 
 
-__all__ = ["app"]
+__all__ = ["init_app"]

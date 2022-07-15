@@ -1,9 +1,6 @@
 from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
 
-from src import app
-
-db = SQLAlchemy(app)
+from .settings import db
 
 
 class OrderModel(db.Model):
