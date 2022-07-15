@@ -48,15 +48,14 @@ services:
   bot:
     container_name: bot
     build:
-      context: ./demon
+      context: demon/
       dockerfile: Dockerfile
-    command:
-      - python3 main.py
+    command: /usr/bin/supervisord
     env_file:
       - .env.dev
     restart: always
     volumes:
-      - ./config/logs/:/home/app/files
+      - ./config/:/home/app/files
     depends_on:
       - sql_database
       - nosql_database
