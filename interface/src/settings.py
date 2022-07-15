@@ -10,6 +10,5 @@ class Settings(object):
     DEBUG = True
     TESTING = False
     CSRF_ENABLED = True
-    SECRET_KEY = Config.SECRET_KEY
     SQLALCHEMY_DATABASE_URI = Config.DATABASE_URL
     SQLALCHEMY_TRACK_MODIFICATIONS = False
