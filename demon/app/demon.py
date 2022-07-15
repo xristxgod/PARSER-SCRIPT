@@ -57,11 +57,11 @@ class Demon:
         return new_data, old_data
 
     @staticmethod
-    def cd_data(d1: List[Dict], d2: List[Dict], data: List[Dict]) -> List[Dict]:
+    def get_cd_data(d1: List[Dict], d2: List[Dict], data: List[Dict]) -> List[Dict]:
         return utils.some_data(utils.get_ids(d1), utils.get_ids(d2), data=data)
 
     @staticmethod
-    def update_data(new_data: List[Dict], old_data: List[Dict]):
+    def get_update_data(new_data: List[Dict], old_data: List[Dict]):
         update_data = []
         for _id in utils.get_ids(new_data).intersection(utils.get_ids(old_data)):
             old = list(filter(lambda x: x.get("id") == _id, old_data))[0]
@@ -95,7 +95,7 @@ class Demon:
         logger.error(f"DON'T HAVE DELETE DATA")
 
     @staticmethod
-    def update_date(data: List[Dict]) -> Optional:
+    def update_data(data: List[Dict]) -> Optional:
         if len(data) > 0:
             data_for_update = google_sheets_worker.data_packaging([list(d.values()) for d in data])
             status_sql = OrderModel.update(data_for_update)
@@ -118,9 +118,9 @@ class Demon:
             return None
         new_data: List[Dict] = [i.to_dict for i in new_data]
         old_data: List[Dict] = [i.to_dict for i in old_data]
-        Demon.create_data(data=Demon.cd_data(new_data, old_data, new_data))
-        Demon.delete_data(data=Demon.cd_data(old_data, new_data, old_data))
-        Demon.update_date(data=Demon.update_data(new_data, old_data=old_data))
+        Demon.create_data(data=Demon.get_cd_data(new_data, old_data, new_data))
+        Demon.delete_data(data=Demon.get_cd_data(old_data, new_data, old_data))
+        Demon.update_data(data=Demon.get_update_data(new_data, old_data=old_data))
 
     # <<<==================================>>> Worker Parser script <<<==============================================>>>
 
